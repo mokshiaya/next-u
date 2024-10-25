@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employer OTP Verification</title>
+    <style>
+		body {
+		            font-family: Arial, sans-serif;
+		            background-color: #f9f9f9;
+		            display: flex;
+		            justify-content: center;
+		            align-items: center;
+		            height: 100vh;
+		            margin: 0;
+		        }
+		        h2 {
+		            text-align: center;
+		            color: #333;
+		        }
+		        form {
+		            background-color: #fff;
+		            padding: 20px;
+		            border-radius: 8px;
+		            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+		            width: 300px;
+		        }
+		        label {
+		            font-size: 14px;
+		            color: #333;
+		        }
+		        input[type="text"], input[type="hidden"] {
+		            width: 100%;
+		            padding: 10px;
+		            margin: 10px 0;
+		            border: 1px solid #ccc;
+		            border-radius: 4px;
+		        }
+		        button {
+		            width: 100%;
+		            padding: 10px;
+		            background-color: #007bff;
+		            color: white;
+		            border: none;
+		            border-radius: 4px;
+		            font-size: 16px;
+		            cursor: pointer;
+		        }
+		        button:hover {
+		            background-color: #0056b3;
+		        }
+		        .success-message, .error-message {
+		            text-align: center;
+		            margin-bottom: 20px;
+		        }
+		        .success-message h3 {
+		            color: green;
+		        }
+		        .error-message h3 {
+		            color: red;
+		        }
+    </style>
+</head>
+<body>
+    <h2>OTP Verification</h2>
+    <div th:if="${successMsg}">
+        <h3 style="color: green;" th:text="${successMsg}"></h3>
+    </div>
+    <div th:if="${errorMsg}">
+        <h3 style="color: red;" th:text="${errorMsg}"></h3>
+    </div>
+
+    <form th:object="${employer}" action="/verifyOtp" method="post">
+        <!-- Hidden fields to retain employer data -->
+        <input type="hidden" th:field="*{fullName}" />
+        <input type="hidden" th:field="*{accountType}" />
+        <input type="hidden" th:field="*{mobileNumber}" />
+        <input type="hidden" th:field="*{email}" />
+        <input type="hidden" th:field="*{password}" />
+
+        <!-- OTP Input -->
+        <label for="otp">Enter OTP:</label>
+        <input type="text" id="otp" name="enteredOtp" placeholder="Enter OTP" required>
+
+        <!-- Submit Button -->
+        <button type="submit">Verify OTP</button>
+    </form>
+</body>
+</html>

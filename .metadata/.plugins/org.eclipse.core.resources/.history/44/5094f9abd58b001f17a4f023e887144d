@@ -1,0 +1,42 @@
+package com.example.NextU.controllers;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ModelAttribute;
+
+import com.example.NextU.models.Employer;
+import com.example.NextU.services.EmployerService;
+
+@Controller
+public class EmployerController 
+{
+	@Autowired
+	private EmployerService employerservice;
+	
+	@GetMapping("/employer-register")
+	public String showEmployerRegistrationForm(Model model) {
+		model.addAttribute("employer", new Employer());
+		return "employer-register";
+	}
+	
+	//@ModelAttribute bind the form data
+	@PostMapping("/registerEmployer")
+	public String registerEmployer(@ModelAttribute("employer") Employer employer, @RequestParam("confirmPassword") String confirmPassword, Model model) {
+		if (!employer.getPassword().equals(confirmPassword)) {
+	        model.addAttribute("errorMsg", "Passwords do not match");
+	        return "employer-register";
+	    }
+		boolean status = employerservice.saveEmployer(employer);
+		if(status) {
+			model.addAttribute("successMsg","User registered successfully");
+		}
+		else {
+			model.addAttribute("errorMsg","User not registered");
+		}
+		return "employer-register";
+	}
+}

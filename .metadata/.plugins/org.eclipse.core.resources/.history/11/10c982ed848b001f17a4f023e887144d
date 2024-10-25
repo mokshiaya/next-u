@@ -1,0 +1,6 @@
+package com.example.NextU.services;
+import com.example.NextU.models.Employer;
+
+public interface EmployerService {
+	public void saveEmployer(Employer employer);
+}
