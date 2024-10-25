@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="ISO-8859-1">
+		<title>NextU</title>
+		
+	</head>
+	<body>
+		<h1>Welcome</h1>
+		<a href="employer-register">Register</a>
+	</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OTP Verification</title>
+    <style>
+        
+    </style>
+</head>
+<body>
+    <h2>OTP Verification</h2>
+    <div th:if="${successMsg}">
+        <h3 style="color: green;" th:text="${successMsg}"></h3>
+    </div>
+    <div th:if="${errorMsg}">
+        <h3 style="color: red;" th:text="${errorMsg}"></h3>
+    </div>
+
+    <form th:object="${employer}" action="/verifyOtp" method="post">
+        <!-- Hidden fields to retain employer data -->
+        <input type="hidden" th:field="*{fullName}" />
+        <input type="hidden" th:field="*{accountType}" />
+        <input type="hidden" th:field="*{mobileNumber}" />
+        <input type="hidden" th:field="*{email}" />
+        <input type="hidden" th:field="*{password}" />
+
+        <!-- OTP Input -->
+        <label for="otp">Enter OTP:</label>
+        <input type="text" id="otp" name="enteredOtp" placeholder="Enter OTP" required>
+
+        <!-- Submit Button -->
+        <button type="submit">Verify OTP</button>
+    </form>
+</body>
+</html>

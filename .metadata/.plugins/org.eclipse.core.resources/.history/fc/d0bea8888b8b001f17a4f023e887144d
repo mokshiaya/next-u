@@ -1,0 +1,25 @@
+package com.example.NextU.controllers;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+
+import com.example.NextU.models.Employer;
+
+@Controller
+public class EmployerController 
+{
+	@GetMapping("/employer-register")
+	public String showEmployerRegistrationForm(Model model) {
+		model.addAttribute("employer", new Employer());
+		return "employer-register";
+	}
+	
+	//@ModelAttribute bind the form data
+	@PostMapping("/registerEmployer")
+	public String registerEmployer(@ModelAttribute("employer") Employer employer) {
+		return "employer-register";
+	}
+}

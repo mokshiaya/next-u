@@ -1,0 +1,19 @@
+package com.example.NextU.services;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.example.NextU.models.Employer;
+import com.example.NextU.repositories.EmployerRepository;
+
+public class EmployerServiceImpl implements EmployerService{
+ 
+	@Autowired
+	private EmployerRepository EmployerRepository;
+	
+	@Override
+	public boolean saveEmployer(Employer employer) {
+		// TODO Auto-generated method stub
+		EmployerRepository.save(employer);
+		return false;
+	}
+	
+}
